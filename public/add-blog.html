@@ -1,55 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Blog</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body>
 
-<header>
+    <header>
 
-    <h1>Add New Blog</h1>
+        <h1>Add New Blog</h1>
 
-    <nav>
-        <a href="index.html">Home</a>
-        <a href="add-blog.html">Add Blog</a>
-    </nav>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="add-blog.html">Add Blog</a>
+        </nav>
 
-</header>
+    </header>
 
-<main>
+    <main>
 
-<form>
+        <form id="blogForm">
 
-<label>Blog Title</label>
+            <label>Blog Title</label>
+            <input type="text" id="title" placeholder="Enter Blog Title">
+            <small id="titleError" class="error"></small>
 
-<input type="text" placeholder="Enter Blog Title">
+            <label>Author Name</label>
+            <input type="text" id="author" placeholder="Enter Author Name">
+            <small id="authorError" class="error"></small>
 
-<label>Author Name</label>
+            <label>Blog Content</label>
+            <textarea id="content" rows="8" placeholder="Write your blog here..."></textarea>
+            <small id="contentError" class="error"></small>
 
-<input type="text" placeholder="Enter Author Name">
+            <button type="submit">Submit Blog</button>
 
-<label>Blog Content</label>
+            <p id="success"></p>
 
-<textarea rows="8" placeholder="Write your blog here..."></textarea>
+        </form>
 
-<button type="submit">
-Submit Blog
-</button>
+        <script src="js/script.js"></script>
 
-</form>
 
-</main>
+        <input type="text" id="title">
 
-<footer>
+        <small id="titleError" class="error"></small>
 
-<p>
-© 2026 Blog Management System | Codomax Internship
-</p>
+        <small id="authorError"></small>
 
-</footer>
+        <small id="contentError"></small>
+    </main>
 
+    <footer>
+
+        <p>
+            © 2026 Blog Management System | Codomax Internship
+        </p>
+
+    </footer>
+    <script src="js/script.js"></script>
 </body>
+
 </html>

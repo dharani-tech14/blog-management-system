@@ -25,29 +25,39 @@ app.post("/api/blogs", (req, res) => {
     const { title, author, content } = req.body;
 
     if (!title || !author || !content) {
+
         return res.status(400).json({
+
             success: false,
             message: "All fields are required."
+
         });
+
     }
 
     const blog = {
+
         id: Date.now(),
         title,
         author,
-        content
+        content,
+        createdAt: new Date()
+
     };
 
     blogs.push(blog);
 
     res.status(201).json({
+
         success: true,
         message: "Blog added successfully!",
         blog
+
     });
 
 });
 
+// Start the server
 app.listen(PORT, () => {
     console.log(`Server running at http://localhost:${PORT}`);
 });

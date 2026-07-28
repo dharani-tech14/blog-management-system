@@ -244,3 +244,52 @@ button:hover {
     box-shadow: 0 15px 30px rgba(59, 130, 246, .4);
 
 }
+
+.blog-container {
+
+    width: 90%;
+    max-width: 900px;
+
+    margin: 40px auto;
+
+}
+
+.blog-card {
+
+    background: #1e293b;
+
+    color: white;
+
+    padding: 20px;
+
+    border-radius: 12px;
+
+    margin-bottom: 20px;
+
+    box-shadow: 0 5px 15px rgba(0, 0, 0, .3);
+
+    transition: .3s;
+
+}
+
+.blog-card:hover {
+
+    transform: translateY(-5px);
+
+}
+
+.blog-card h3 {
+
+    color: #60a5fa;
+
+    margin-bottom: 10px;
+
+}
+
+.blog-card h4 {
+
+    color: #cbd5e1;
+
+    margin-bottom: 15px;
+
+}

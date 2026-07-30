@@ -26,7 +26,7 @@ async function loadBlogs() {
                     <p>${blog.content}</p>
 
                     <button class="edit-btn"
-                        onclick="editBlog(${blog.id})">
+                        onclick='openEditModal(${JSON.stringify(blog)})'>
                         Edit Blog
                     </button>
 
@@ -48,19 +48,38 @@ async function loadBlogs() {
 
 }
 
-async function editBlog(id) {
+function openEditModal(blog) {
 
-    const title = prompt("Enter new title:");
+    document.getElementById("editModal").style.display = "block";
 
-    if (title === null) return;
+    document.getElementById("editId").value = blog.id;
+    document.getElementById("editTitle").value = blog.title;
+    document.getElementById("editAuthor").value = blog.author;
+    document.getElementById("editContent").value = blog.content;
 
-    const author = prompt("Enter new author:");
+}
 
-    if (author === null) return;
+function closeModal() {
 
-    const content = prompt("Enter new content:");
+    document.getElementById("editModal").style.display = "none";
 
-    if (content === null) return;
+}
+
+async function updateBlog() {
+
+    const id = document.getElementById("editId").value;
+
+    const title = document.getElementById("editTitle").value.trim();
+    const author = document.getElementById("editAuthor").value.trim();
+    const content = document.getElementById("editContent").value.trim();
+
+    if (!title || !author || !content) {
+
+        alert("All fields are required.");
+
+        return;
+
+    }
 
     try {
 
@@ -85,6 +104,8 @@ async function editBlog(id) {
         if (data.success) {
 
             alert("Blog updated successfully!");
+
+            closeModal();
 
             loadBlogs();
 

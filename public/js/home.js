@@ -8,10 +8,8 @@ async function loadBlogs() {
         const blogs = await response.json();
 
         if (blogs.length === 0) {
-
             blogList.innerHTML = "<p>No blogs available.</p>";
             return;
-
         }
 
         blogList.innerHTML = "";
@@ -27,8 +25,12 @@ async function loadBlogs() {
 
                     <p>${blog.content}</p>
 
-                    <button
-                        class="delete-btn"
+                    <button class="edit-btn"
+                        onclick="editBlog(${blog.id})">
+                        Edit Blog
+                    </button>
+
+                    <button class="delete-btn"
                         onclick="deleteBlog(${blog.id})">
                         Delete Blog
                     </button>
@@ -40,22 +42,71 @@ async function loadBlogs() {
 
     } catch (error) {
 
-        blogList.innerHTML =
-            "<p>Unable to load blogs.</p>";
+        blogList.innerHTML = "<p>Unable to load blogs.</p>";
 
     }
+
 }
 
+async function editBlog(id) {
+
+    const title = prompt("Enter new title:");
+
+    if (title === null) return;
+
+    const author = prompt("Enter new author:");
+
+    if (author === null) return;
+
+    const content = prompt("Enter new content:");
+
+    if (content === null) return;
+
+    try {
+
+        const response = await fetch(`/api/blogs/${id}`, {
+
+            method: "PUT",
+
+            headers: {
+                "Content-Type": "application/json"
+            },
+
+            body: JSON.stringify({
+                title,
+                author,
+                content
+            })
+
+        });
+
+        const data = await response.json();
+
+        if (data.success) {
+
+            alert("Blog updated successfully!");
+
+            loadBlogs();
+
+        } else {
+
+            alert(data.message);
+
+        }
+
+    } catch (error) {
+
+        alert("Unable to update blog.");
+
+    }
+
+}
 
 async function deleteBlog(id) {
 
-    const confirmDelete = confirm(
-        "Are you sure you want to delete this blog?"
-    );
+    const confirmDelete = confirm("Are you sure you want to delete this blog?");
 
-    if (!confirmDelete) {
-        return;
-    }
+    if (!confirmDelete) return;
 
     try {
 
@@ -71,19 +122,14 @@ async function deleteBlog(id) {
 
             loadBlogs();
 
-        } else {
-
-            alert(data.message);
-
         }
 
     } catch (error) {
 
-        alert("Unable to delete the blog.");
+        alert("Unable to delete blog.");
 
     }
 
 }
-
 
 loadBlogs();

@@ -10,11 +10,10 @@ const contentError = document.getElementById("contentError");
 
 const success = document.getElementById("success");
 
-form.addEventListener("submit", function (e) {
+form.addEventListener("submit", async function (e) {
 
     e.preventDefault();
 
-    // Clear previous messages
     titleError.textContent = "";
     authorError.textContent = "";
     contentError.textContent = "";
@@ -22,7 +21,7 @@ form.addEventListener("submit", function (e) {
 
     let isValid = true;
 
-    // Blog Title Validation
+    // Title Validation
     if (title.value.trim() === "") {
         titleError.textContent = "⚠ Blog title is required.";
         isValid = false;
@@ -40,7 +39,7 @@ form.addEventListener("submit", function (e) {
         isValid = false;
     }
 
-    // Blog Content Validation
+    // Content Validation
     if (content.value.trim() === "") {
         contentError.textContent = "⚠ Blog content cannot be empty.";
         isValid = false;
@@ -49,18 +48,54 @@ form.addEventListener("submit", function (e) {
         isValid = false;
     }
 
-    // Success
-    if (isValid) {
+    if (!isValid) return;
 
-        success.textContent = "🎉 Blog submitted successfully!";
-        success.classList.add("success");
+    try {
 
-        form.reset();
+        const response = await fetch("/api/blogs", {
 
-        // Hide success message after 3 seconds
-        setTimeout(() => {
-            success.textContent = "";
-        }, 3000);
+            method: "POST",
+
+            headers: {
+                "Content-Type": "application/json"
+            },
+
+            body: JSON.stringify({
+                title: title.value,
+                author: author.value,
+                content: content.value
+            })
+
+        });
+
+        const data = await response.json();
+
+        if (data.success) {
+
+            success.textContent = "🎉 Blog submitted successfully!";
+            success.classList.add("success");
+
+            form.reset();
+
+            // Redirect after 1.5 seconds
+            setTimeout(() => {
+
+                window.location.href = "/index.html";
+
+            }, 1500);
+
+        } else {
+
+            alert(data.message);
+
+        }
+
+    } catch (error) {
+
+        alert("Unable to submit blog.");
+
+        console.error(error);
+
     }
 
 });

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Management System</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <header>
+        <h1>Blog Management System</h1>
+
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="add-blog.html">Add Blog</a>
+        </nav>
+    </header>
+
+    <main>
+
+        <!-- Hero Section -->
+        <section class="hero">
+            <h2>Welcome to the Blog Management System</h2>
+
+            <p>
+                Read the latest blogs and share your own ideas.
+            </p>
+
+            <a href="add-blog.html">
+                <button>Add Your First Blog</button>
+            </a>
+        </section>
+
+        <!-- Blog Display Section -->
+        <section class="blog-container">
+
+            <h2>Latest Blogs</h2>
+
+            <div id="blogList">
+                <p>No blogs available.</p>
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- Edit Blog Modal -->
+    <div id="editModal" class="modal">
+
+        <div class="modal-content">
+
+            <span class="close" onclick="closeModal()">&times;</span>
+
+            <h2>Edit Blog</h2>
+
+            <input type="hidden" id="editId">
+
+            <label>Blog Title</label>
+            <input type="text" id="editTitle">
+
+            <label>Author</label>
+            <input type="text" id="editAuthor">
+
+            <label>Content</label>
+            <textarea id="editContent" rows="6"></textarea>
+
+            <div class="modal-buttons">
+                <button class="cancel-btn" onclick="closeModal()">Cancel</button>
+                <button class="update-btn" onclick="updateBlog()">Update Blog</button>
+            </div>
+
+        </div>
+
+    </div>
+
+    <footer>
+
+        <p>
+            © 2026 Blog Management System. Built with ❤️ by Dharani J | Codomax Internship
+        </p>
+
+    </footer>
+
+    <!-- Load blogs from API -->
+    <script src="js/home.js"></script>
+
+</body>
+
+</html>
